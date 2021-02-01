@@ -10,7 +10,7 @@
 class DeviceContext
 {
 public:
-	DeviceContext(ID3D11DeviceContext* device_context);
+	DeviceContext(ID3D11DeviceContext* device_context, Texture* defaultTexture);
 	~DeviceContext();
 	bool clearRenderTargetColor(SwapChain* swap_chain, float red, float green, float blue, float alpha);
 	bool release();
@@ -26,8 +26,10 @@ public:
 	void setPixelConstantBuffer(ID3D11Buffer* buffer);
 	void setIndexBuffer(IndexBuffer * index_buffer);
 	void setTexture(Texture* texture);
+	void setDefaultTexture();
 	ID3D11DeviceContext* getInternalContext();
 
 private:
 	ID3D11DeviceContext * m_device_context;
+	Texture* m_defualtTexture;
 };

@@ -1,7 +1,7 @@
 #include "graphics/GraphicsEngine.h"
 
 GraphicsEngine::GraphicsEngine() :
-	m_imm_device_context(nullptr)
+	m_imm_device_context(nullptr, nullptr)
 {
 }
 
@@ -11,6 +11,7 @@ GraphicsEngine::~GraphicsEngine()
 
 bool GraphicsEngine::init()
 {
+	CoInitialize(0);
 	D3D_DRIVER_TYPE driver_types[] =
 	{
 		D3D_DRIVER_TYPE_HARDWARE,
@@ -39,11 +40,13 @@ bool GraphicsEngine::init()
 		return false;
 	}
 
-	m_imm_device_context = DeviceContext(m_imm_context);
-
 	m_d3d_device->QueryInterface(__uuidof(IDXGIDevice), (void**)&m_dxgi_device);
 	m_dxgi_device->GetParent(__uuidof(IDXGIAdapter), (void**)&m_dxgi_adapter);
 	m_dxgi_adapter->GetParent(__uuidof(IDXGIFactory), (void**)&m_dxgi_factory);
+
+	Texture* texture = new Texture();
+	texture->init(this->m_defaultTexturePath, this->m_d3d_device);
+	m_imm_device_context = DeviceContext(m_imm_context, texture);
 
 	return true;
 }

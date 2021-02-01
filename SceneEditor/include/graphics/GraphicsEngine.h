@@ -33,4 +33,5 @@ private:
 	ID3DBlob* m_psblob = nullptr;
 	ID3D11VertexShader* m_vs = nullptr;
 	ID3D11PixelShader* m_ps = nullptr;
+	std::string m_defaultTexturePath = "assets/textures/default.png";
 };

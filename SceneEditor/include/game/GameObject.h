@@ -1,8 +1,10 @@
 #pragma once
+#define NOMINMAX
 #include "graphics/DeviceContext.h"
 #include "graphics/ViewportParams.h"
 #include "Component.h"
 #include "math/Vec3.h"
+#include "reactphysics3d/reactphysics3d.h"
 
 class GameObject
 {
@@ -17,7 +19,9 @@ public:
 	void setScale(const Vec3& scale);
 	Vec3 getLocalScale();
 	void setRotation(const Vec3& rotation);
-	Vec3 getLocalRotation();
+	void setRotation(reactphysics3d::Quaternion rotation);
+	Vec3 getLocalRotationVector();
+	reactphysics3d::Quaternion getLocalRotationQuaternion();
 	void setID(int id);
 	int getID();
 	void addComponent(Component* component);
@@ -29,7 +33,7 @@ protected:
 	int m_id = -1;
 	Vec3 m_localPosition;
 	Vec3 m_localScale;
-	Vec3 m_localRotation;
+	reactphysics3d::Quaternion m_localRotation;
 	std::vector<Component*> m_components;
 };
 

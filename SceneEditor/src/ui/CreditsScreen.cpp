@@ -10,8 +10,7 @@ CreditsScreen::~CreditsScreen()
 
 void CreditsScreen::init(ID3D11Device * device)
 {
-	std::wstring wLogoPath = std::wstring(this->m_logoPath.begin(), this->m_logoPath.end());
-	this->m_logo.init(wLogoPath.c_str(), device);
+	this->m_logo.init(this->m_logoPath, device);
 }
 
 void CreditsScreen::update(float deltaTime)

@@ -1,10 +1,6 @@
 #pragma once
 #include "GameEngine.h"
 #include "graphics/Cube.h"
-#include "graphics/Plane3D.h"
-#include "graphics/Capsule.h"
-#include "graphics/Sphere.h"
-#include "graphics/Cylinder.h"
 #include "graphics/Vertex.h"
 #include "math/Constant.h"
 #include "game/Camera.h"
@@ -13,10 +9,12 @@
 #include "imgui.h"
 #include "backends/imgui_impl_dx11.h"
 #include "backends/imgui_impl_win32.h"
-#include "graphics/TexturedModel.h"
-#include "graphics/ColoredModel.h"
 #include "ui/MainMenuBar.h"
 #include "ui/CreditsScreen.h"
+#include "graphics/Sphere.h"
+#include "graphics/Cylinder.h"
+#include "graphics/Capsule.h"
+#include "graphics/OBJModel.h"
 
 class RendererGameEngine : public GameEngine
 {
@@ -35,7 +33,8 @@ private:
 	PixelShader* m_pixelColorShader;
 	VertexShader* m_vertexTextureShader;
 	PixelShader* m_pixelTextureShader;
-	Cube* m_cubes[20];
-	Cube* m_plane;
+	OBJModel* m_sphere;
+	//Cube* m_cubes[20];
+	//Cube* m_plane;
 	Camera m_camera;
 };

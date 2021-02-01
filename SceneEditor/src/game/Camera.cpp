@@ -36,8 +36,8 @@ void Camera::updateViewMatrix()
 	Mat4 translationMatrix;
 	Mat4 newViewMatrix;
 
-	rotationXMatrix.setRotationX(this->m_localRotation.m_x);
-	rotationYMatrix.setRotationY(this->m_localRotation.m_y);
+	rotationXMatrix.setRotationX(this->m_rotationX);
+	rotationYMatrix.setRotationY(this->m_rotationY);
 	translationMatrix.setTranslation(this->m_localPosition);
 
 	newViewMatrix = translationMatrix * rotationYMatrix * rotationXMatrix;
@@ -92,8 +92,8 @@ void Camera::onMouseMove(const Vec2 & mouse_pos, const Vec2& deltaPos)
 {
 	if (this->m_canMove)
 	{
-		this->m_localRotation.m_x += deltaPos.m_y * m_sensitivity;
-		this->m_localRotation.m_y += deltaPos.m_x * m_sensitivity;
+		this->m_rotationX += deltaPos.m_y * m_sensitivity;
+		this->m_rotationY += deltaPos.m_x * m_sensitivity;
 		this->updateViewMatrix();
 	}
 }

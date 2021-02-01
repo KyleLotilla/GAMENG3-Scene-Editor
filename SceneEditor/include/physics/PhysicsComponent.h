@@ -10,9 +10,9 @@ public:
 	PhysicsComponent();
 	~PhysicsComponent();
 	void init(reactphysics3d::PhysicsCommon* physicsCommon, reactphysics3d::PhysicsWorld* physicsWorld, GameObject* owner);
-	void setTransform(Vec3 position, Vec3 rotation, Vec3 scale);
+	void setTransform(Vec3 position, reactphysics3d::Quaternion rotation, Vec3 scale);
 	Vec3 getPosition();
-	Vec3 getRotation();
+	reactphysics3d::Quaternion getRotation();
 	void setBodyType(reactphysics3d::BodyType bodyType);
 
 private:

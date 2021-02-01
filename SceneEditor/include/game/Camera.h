@@ -24,5 +24,7 @@ private:
 	float m_movementSpeed = 5.0f;
 	float m_speedZ = 0.0f;
 	float m_speedX = 0.0f;
+	float m_rotationX = 0.0f;
+	float m_rotationY = 0.0f;
 	bool m_canMove = false;
 };

@@ -1,4 +1,16 @@
 #pragma once
+#include "graphics/DefaultGraphicsPrimitive.h"
+
+class Cube : public DefaultGraphicsPrimitive
+{
+public:
+	Cube();
+	~Cube();
+	void init(VertexShader* vertexShader, PixelShader* pixelShader, ID3D11Device* device);
+	virtual void update(float deltaTime);
+};
+
+/*
 #include "game/GameObject.h"
 #include "graphics/ConstantBuffer.h"
 #include "math/Constant.h"
@@ -28,5 +40,5 @@ private:
 	/*
 	float m_animSpeed;
 	bool m_increasing;
-	*/
 };
+*/

@@ -34,7 +34,7 @@ void InspectorScreen::drawUI(ViewportParams viewportParams)
 		if (selectedGameObject != nullptr)
 		{
 			Vec3 position = selectedGameObject->getLocalPosition();
-			Vec3 rotation = selectedGameObject->getLocalRotation();
+			Vec3 rotation = selectedGameObject->getLocalRotationVector();
 			Vec3 scale = selectedGameObject->getLocalScale();
 
 			this->m_position[0] = position.m_x;

@@ -8,10 +8,11 @@ Texture::~Texture()
 {
 }
 
-void Texture::init(const wchar_t* full_path, ID3D11Device * device)
+void Texture::init(std::string path, ID3D11Device * device)
 {
 	DirectX::ScratchImage image_data;
-	HRESULT res = DirectX::LoadFromWICFile(full_path, DirectX::WIC_FLAGS_NONE, nullptr, image_data);
+	std::wstring wPath = std::wstring(path.begin(), path.end());
+	HRESULT res = DirectX::LoadFromWICFile(wPath.c_str(), DirectX::WIC_FLAGS_NONE, nullptr, image_data);
 
 	if (SUCCEEDED(res))
 	{
@@ -25,6 +26,7 @@ void Texture::init(const wchar_t* full_path, ID3D11Device * device)
 		desc.Texture2D.MostDetailedMip = 0;
 
 		device->CreateShaderResourceView(m_texture, &desc, &m_shader_res_view);
+		this->m_path = path;
 	}
 	else
 	{
@@ -35,6 +37,11 @@ void Texture::init(const wchar_t* full_path, ID3D11Device * device)
 ID3D11ShaderResourceView * Texture::getShaderResourceView()
 {
 	return this->m_shader_res_view;
+}
+
+std::string Texture::getPath()
+{
+	return this->m_path;
 }
 
 void Texture::release()

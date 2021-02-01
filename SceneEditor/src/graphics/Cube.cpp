@@ -34,8 +34,6 @@ void Cube::init(VertexShader * vertexShader, PixelShader * pixelShader, ID3D11De
 		{ Vec2(1.0f,1.0f) }
 	};
 
-
-
 	VertexTexture vertex_list[] =
 	{
 		{ position_list[0],texcoord_list[1] },
@@ -95,14 +93,9 @@ void Cube::init(VertexShader * vertexShader, PixelShader * pixelShader, ID3D11De
 
 	UINT size_index_list = ARRAYSIZE(index_list);
 	this->m_indexBuffer.load(index_list, size_index_list, device);
+	this->m_constantBuffer.load(&(m_shaderInput), sizeof(DefaultShaderInput), device);
 
-	Mat4 identityMatrix;
-	identityMatrix.setIdentity();
-	this->m_matrices.m_model = identityMatrix;
-	this->m_matrices.m_proj = identityMatrix;
-	this->m_matrices.m_view = identityMatrix;
-
-	this->m_constantBuffer.load(&(m_matrices), sizeof(CoordinateSystemMatrices), device);
+	//this->m_constantBuffer.load(&(m_matrices), sizeof(CoordinateSystemMatrices), device);
 
 	/*
 	this->m_animSpeed = (float)(rand() % 11 + 10);
@@ -117,11 +110,12 @@ void Cube::init(VertexShader * vertexShader, PixelShader * pixelShader, ID3D11De
 	}
 	*/
 }
-
+/*
 void Cube::setTexture(Texture * texture)
 {
 	this->m_texture = texture;
 }
+*/
 
 void Cube::update(float deltaTime)
 {
@@ -151,7 +145,7 @@ void Cube::update(float deltaTime)
 	}
 	*/
 }
-
+/*
 void Cube::draw(DeviceContext* deviceContext, ViewportParams viewportParams)
 {
 	Mat4 modelMatrix;
@@ -191,3 +185,4 @@ void Cube::release()
 	this->m_texture->release();
 	delete m_texture;
 }
+*/

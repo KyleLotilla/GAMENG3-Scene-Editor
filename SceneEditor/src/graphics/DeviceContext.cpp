@@ -1,7 +1,7 @@
 #include "graphics/DeviceContext.h"
 
-DeviceContext::DeviceContext(ID3D11DeviceContext * device_context) :
-	m_device_context(device_context)
+DeviceContext::DeviceContext(ID3D11DeviceContext * device_context, Texture* defaultTexture) :
+	m_device_context(device_context), m_defualtTexture(defaultTexture)
 {
 }
 
@@ -98,6 +98,12 @@ void DeviceContext::setIndexBuffer(IndexBuffer * index_buffer)
 void DeviceContext::setTexture(Texture * texture)
 {
 	ID3D11ShaderResourceView* shaderResourceView = texture->getShaderResourceView();
+	m_device_context->PSSetShaderResources(0, 1, &(shaderResourceView));
+}
+
+void DeviceContext::setDefaultTexture()
+{
+	ID3D11ShaderResourceView* shaderResourceView = this->m_defualtTexture->getShaderResourceView();
 	m_device_context->PSSetShaderResources(0, 1, &(shaderResourceView));
 }
 

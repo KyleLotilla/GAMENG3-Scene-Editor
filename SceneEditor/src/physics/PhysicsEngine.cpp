@@ -19,16 +19,15 @@ void PhysicsEngine::update(float delta_time)
 {
 	if (delta_time > 0.0f)
 	{
-		/*
+		
 		for (GameObject* gameObject : *(this->m_gameObjectManager))
 		{
 			PhysicsComponent* component = nullptr;
 			if (component = gameObject->findComponent<PhysicsComponent>(ComponentType::PHYSICS))
 			{
-				component->setTransform(gameObject->getLocalPosition(), gameObject->getLocalRotation(), gameObject->getLocalScale());
+				component->setTransform(gameObject->getLocalPosition(), gameObject->getLocalRotationQuaternion(), gameObject->getLocalScale());
 			}
 		}
-		*/
 
 		this->m_physicsWorld->update(delta_time * 0.5);
 
