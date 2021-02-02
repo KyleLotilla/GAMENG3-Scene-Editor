@@ -58,3 +58,29 @@ reactphysics3d::PhysicsWorld* PhysicsEngine::getPhysicsWorld()
 	return this->m_physicsWorld;
 }
 
+void PhysicsEngine::stateUpdated(EditorState oldState, EditorState newState)
+{
+	if (newState == EditorState::EDIT_MODE)
+	{
+		for (GameObject* gameObject : *(this->m_gameObjectManager))
+		{
+			PhysicsComponent* component = nullptr;
+			if (component = gameObject->findComponent<PhysicsComponent>(ComponentType::PHYSICS))
+			{
+				component->setIsActive(false);
+			}
+		}
+	}
+	else if (newState == EditorState::PLAY_MODE)
+	{
+		for (GameObject* gameObject : *(this->m_gameObjectManager))
+		{
+			PhysicsComponent* component = nullptr;
+			if (component = gameObject->findComponent<PhysicsComponent>(ComponentType::PHYSICS))
+			{
+				component->setIsActive(true);
+			}
+		}
+	}
+}
+

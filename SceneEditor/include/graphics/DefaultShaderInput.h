@@ -1,5 +1,5 @@
 #pragma once
-#include "Mat4.h"
+#include "math/Mat4.h"
 __declspec(align(16))
 struct DefaultShaderInput
 {

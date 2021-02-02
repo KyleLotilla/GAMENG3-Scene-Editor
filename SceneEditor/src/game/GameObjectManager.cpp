@@ -88,3 +88,35 @@ GameObject * GameObjectManager::getGameObject(int id)
 	}
 }
 
+void GameObjectManager::saveObjectState()
+{
+	this->m_transformStates.clear();
+	for (GameObject* gameObject : this->m_gameObjects)
+	{
+		this->m_transformStates.push_back({ gameObject->getLocalPosition(), gameObject->getLocalRotationQuaternion(), gameObject->getLocalScale() });
+	}
+}
+
+void GameObjectManager::restoreObjectState()
+{
+	for (int i = 0; i < this->m_transformStates.size(); i++)
+	{
+		this->m_gameObjects[i]->setPosition(this->m_transformStates[i].m_position);
+		this->m_gameObjects[i]->setRotation(this->m_transformStates[i].m_rotation);
+		this->m_gameObjects[i]->setScale(this->m_transformStates[i].m_scale);
+	}
+	this->m_transformStates.clear();
+}
+
+void GameObjectManager::stateUpdated(EditorState oldState, EditorState newState)
+{
+	if (newState == EditorState::PLAY_MODE && oldState == EditorState::EDIT_MODE)
+	{
+		this->saveObjectState();
+	}
+	else if (newState == EditorState::EDIT_MODE)
+	{
+		this->restoreObjectState();
+	}
+}
+

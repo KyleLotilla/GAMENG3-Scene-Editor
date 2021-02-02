@@ -56,3 +56,8 @@ void PhysicsComponent::setBodyType(reactphysics3d::BodyType bodyType)
 {
 	this->m_rigidBody->setType(bodyType);
 }
+
+void PhysicsComponent::setIsActive(bool active)
+{
+	this->m_rigidBody->setIsActive(active);
+}

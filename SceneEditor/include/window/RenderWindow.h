@@ -1,6 +1,6 @@
 #pragma once
-#include "engine/Window.h"
-#include "GraphicsEngine.h"
+#include "window/Window.h"
+#include "graphics/GraphicsEngine.h"
 
 class RenderWindow : public Window
 {

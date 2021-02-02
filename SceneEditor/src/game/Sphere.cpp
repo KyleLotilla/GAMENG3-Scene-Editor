@@ -1,4 +1,4 @@
-#include "graphics/Sphere.h"
+#include "game/Sphere.h"
 
 void Sphere::init(VertexShader * vertexShader, PixelShader * pixelShader, ID3D11Device * device, int sectorCount, int stackCount, float radius)
 {

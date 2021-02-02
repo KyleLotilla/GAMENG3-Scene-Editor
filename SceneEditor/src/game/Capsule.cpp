@@ -1,5 +1,4 @@
-#include "graphics/Capsule.h"
-#include <iostream>
+#include "game/Capsule.h"
 
 void Capsule::init(VertexShader * vertexShader, PixelShader * pixelShader, ID3D11Device * device, float length, float resolution, float radius)
 {

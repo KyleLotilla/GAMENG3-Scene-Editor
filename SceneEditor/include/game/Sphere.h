@@ -1,5 +1,5 @@
 #pragma once
-#include "graphics/DefaultGraphicsPrimitive.h"
+#include "game/DefaultGraphicsPrimitive.h"
 #include <vector>
 
 class Sphere : public DefaultGraphicsPrimitive

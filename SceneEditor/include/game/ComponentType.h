@@ -2,7 +2,7 @@
 
 enum ComponentType
 {
-	NOTSET = -1,
-	PHYSICS = 0,
-	TEXTURE = 1
+	NOTSET = 0,
+	PHYSICS = 1,
+	TEXTURE = 2
 };

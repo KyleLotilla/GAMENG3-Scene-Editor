@@ -1,13 +1,14 @@
-#include "graphics/Plane3D.h"
+#include "game/Plane3D.h"
 
 Plane3D::Plane3D()
 {
+	this->m_localScale = Vec3(1.0f, 0.2f, 1.0f);
 }
 
 Plane3D::~Plane3D()
 {
 }
-
+/*
 void Plane3D::init(VertexShader * vertexShader, PixelShader * pixelShader, ID3D11Device * device)
 {
 	this->m_vertexShader = vertexShader;
@@ -66,44 +67,4 @@ void Plane3D::init(VertexShader * vertexShader, PixelShader * pixelShader, ID3D1
 
 	this->m_constantBuffer.load(&(m_matrices), sizeof(CoordinateSystemMatrices), device);
 }
-
-void Plane3D::update(float deltaTime)
-{
-}
-
-void Plane3D::draw(DeviceContext* deviceContext, ViewportParams viewportParams)
-{
-	Mat4 modelMatrix;
-	Mat4 translateMatrix;
-	Mat4 scaleMatrix;
-	Mat4 rotationXMatrix;
-	Mat4 rotationYMatrix;
-	Mat4 rotationZMatrix;
-
-	scaleMatrix.setScale(this->m_localScale);
-	rotationZMatrix.setRotationZ(this->m_localRotation.m_z);
-	rotationYMatrix.setRotationY(this->m_localRotation.m_y);
-	rotationXMatrix.setRotationX(this->m_localRotation.m_x);
-	translateMatrix.setTranslation(this->m_localPosition);
-	modelMatrix = rotationXMatrix * rotationYMatrix * rotationZMatrix * scaleMatrix * translateMatrix;
-
-	this->m_matrices.m_model = modelMatrix;
-	this->m_matrices.m_proj = viewportParams.m_projection;
-	this->m_matrices.m_view = viewportParams.m_view;
-
-	this->m_constantBuffer.update(deviceContext, &m_matrices);
-
-	deviceContext->setVertexShader(this->m_vertexShader);
-	deviceContext->setVertexConstantBuffer(this->m_constantBuffer.getBuffer());
-	deviceContext->setPixelShader(this->m_pixelShader);
-	deviceContext->setVertexBuffer(&(m_vertexBuffer));
-	deviceContext->setIndexBuffer(&(m_indexBuffer));
-	deviceContext->drawIndexedTriangleList(this->m_indexBuffer.getSizeIndexList(), 0, 0);
-}
-
-void Plane3D::release()
-{
-	this->m_vertexBuffer.release();
-	this->m_constantBuffer.release();
-	this->m_indexBuffer.release();
-}
+*/

@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "input/InputListener.h"
-#include "engine/Window.h"
+#include "window/Window.h"
 
 class Camera : public GameObject, public InputListener
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "graphics/DefaultGraphicsPrimitive.h"
+#include "game/DefaultGraphicsPrimitive.h"
 
 class Cylinder : public DefaultGraphicsPrimitive
 {

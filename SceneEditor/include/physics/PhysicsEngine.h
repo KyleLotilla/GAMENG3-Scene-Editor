@@ -1,8 +1,9 @@
 #pragma once
 #include "PhysicsComponent.h"
 #include "game/GameObjectManager.h"
+#include "editor/EditorStateListener.h"
 
-class PhysicsEngine
+class PhysicsEngine : public EditorStateListener
 {
 public:
 	PhysicsEngine();
@@ -11,6 +12,7 @@ public:
 	void setGameObjectManager(GameObjectManager* gameObjectManager);
 	reactphysics3d::PhysicsCommon* getPhysicsCommon();
 	reactphysics3d::PhysicsWorld* getPhysicsWorld();
+	void stateUpdated(EditorState oldState, EditorState newState);
 
 private:
 	reactphysics3d::PhysicsCommon* m_physicsCommon;

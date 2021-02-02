@@ -1,7 +1,7 @@
 #pragma once
 #include "game/GameObject.h"
 #include "graphics/ConstantBuffer.h"
-#include "math/Constant.h"
+#include "graphics/DefaultShaderInput.h"
 #include "graphics/Vertex.h"
 #include "graphics/Texture.h"
 #include "graphics/TextureComponent.h"

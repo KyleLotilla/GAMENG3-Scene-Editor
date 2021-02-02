@@ -14,6 +14,7 @@ public:
 	Vec3 getPosition();
 	reactphysics3d::Quaternion getRotation();
 	void setBodyType(reactphysics3d::BodyType bodyType);
+	void setIsActive(bool active);
 
 private:
 	reactphysics3d::RigidBody* m_rigidBody;

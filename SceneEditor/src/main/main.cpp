@@ -1,8 +1,8 @@
-#include "engine/RendererGameEngine.h"
+#include "editor/SceneEditor.h"
 
 int main()
 {
-	RendererGameEngine game;
+	SceneEditor game;
 	game.run();
 	return 0;
 }

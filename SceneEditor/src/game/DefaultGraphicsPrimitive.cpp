@@ -1,4 +1,4 @@
-#include "graphics/DefaultGraphicsPrimitive.h"
+#include "game/DefaultGraphicsPrimitive.h"
 
 DefaultGraphicsPrimitive::DefaultGraphicsPrimitive()
 {
@@ -54,7 +54,6 @@ void DefaultGraphicsPrimitive::draw(DeviceContext* deviceContext, ViewportParams
 
 	translateMatrix.setTranslation(this->m_localPosition);
 	modelMatrix = rotationMatrix * scaleMatrix * translateMatrix;
-	//modelMatrix = scaleMatrix * translateMatrix;
 
 	this->m_shaderInput.m_model = modelMatrix;
 	this->m_shaderInput.m_proj = viewportParams.m_projection;

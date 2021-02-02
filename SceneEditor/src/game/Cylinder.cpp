@@ -1,4 +1,4 @@
-#include "graphics/Cylinder.h"
+#include "game/Cylinder.h"
 
 void Cylinder::init(VertexShader * vertexShader, PixelShader * pixelShader, ID3D11Device * device, int sectorCount, float height, float radius)
 {

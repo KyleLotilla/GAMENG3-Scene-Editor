@@ -1,4 +1,4 @@
-#include "graphics/RenderWindow.h"
+#include "window/RenderWindow.h"
 
 RenderWindow::RenderWindow(GraphicsEngine* graphicsEngine)
 	: m_graphicsEngine(graphicsEngine)

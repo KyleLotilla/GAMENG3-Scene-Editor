@@ -1,4 +1,4 @@
-#include "engine/Window.h"
+#include "window/Window.h"
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 Window::Window()
@@ -57,7 +57,7 @@ bool Window::init()
 	if (!(RegisterClassEx(&wc)))
 		return false;
 
-	this->m_hwnd = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "DEFAULT_WINDOW_CLASS", "DirectX Application", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1024, 720, NULL, NULL, NULL, this);
+	this->m_hwnd = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "DEFAULT_WINDOW_CLASS", "Scene Editor", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1024, 720, NULL, NULL, NULL, this);
 	this->onCreate();
 
 	if (!this->m_hwnd)

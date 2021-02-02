@@ -1,5 +1,5 @@
 #pragma once
-#include "graphics/RenderWindow.h"
+#include "window/RenderWindow.h"
 #include "time/EngineTime.h"
 #include "input/InputEngine.h"
 #include "ui/UIEngine.h"
