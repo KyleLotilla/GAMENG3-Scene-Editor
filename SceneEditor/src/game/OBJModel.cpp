@@ -44,8 +44,16 @@ void OBJModel::init(std::string path, VertexShader * vertexShader, PixelShader *
 				tinyobj::real_t vy = attribs.vertices[index.vertex_index * 3 + 1];
 				tinyobj::real_t vz = attribs.vertices[index.vertex_index * 3 + 2];
 
-				tinyobj::real_t tx = attribs.texcoords[index.texcoord_index * 2 + 0];
-				tinyobj::real_t ty = attribs.texcoords[index.texcoord_index * 2 + 1];
+				tinyobj::real_t tx = 0.0f;
+				if (index.texcoord_index * 2 + 0 < attribs.texcoords.size())
+				{
+					tinyobj::real_t tx = attribs.texcoords[index.texcoord_index * 2 + 0];
+				}
+				tinyobj::real_t ty = 0.0f;
+				if (index.texcoord_index * 2 + 1 < attribs.texcoords.size())
+				{
+					tinyobj::real_t ty = attribs.texcoords[index.texcoord_index * 2 + 1];
+				}
 
 				VertexTexture vertex = { Vec3(vx, vy, vz), Vec2(tx, ty) };
 				list_vertices.push_back(vertex);
