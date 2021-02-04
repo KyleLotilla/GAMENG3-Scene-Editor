@@ -10,6 +10,9 @@
 #include "editor/TranslateCommand.h"
 #include "editor/RotateCommand.h"
 #include "editor/ScaleCommand.h"
+#include "physics/PhysicsEngine.h"
+#include "graphics/TextureComponent.h"
+#include "ImGuiFileDialog.h"
 
 class InspectorScreen : public UIScreen, public EditorStateListener
 {
@@ -22,6 +25,8 @@ public:
 	virtual void update(float deltaTime);
 	virtual void drawUI(ViewportParams viewportParams);
 	void stateUpdated(EditorState oldState, EditorState newState);
+	void setPhysicsEngine(PhysicsEngine* physicsEngine);
+	void setDevice(ID3D11Device* device);
 
 private:
 	GameObjectManager* m_gameObjectManager;
@@ -31,4 +36,6 @@ private:
 	float m_rotation[3];
 	float m_scale[3];
 	ImGuiInputTextFlags m_textFlags = ImGuiInputTextFlags_EnterReturnsTrue;
+	PhysicsEngine* m_physicsEngine;
+	ID3D11Device* m_device;
 };

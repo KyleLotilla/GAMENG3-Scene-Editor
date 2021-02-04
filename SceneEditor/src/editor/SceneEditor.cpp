@@ -76,7 +76,7 @@ bool SceneEditor::init()
 	this->m_pixelShader = this->m_graphicsEngine.createPixelShader(shader_byte_code, size_shader);
 	this->m_graphicsEngine.releaseCompiledShader();
 
-	for (int i = 0; i < 20; i++)
+	/*for (int i = 0; i < 20; i++)
 	{
 		this->m_cubes[i] = new Cube();
 		this->m_cubes[i]->init(this->m_vertexShader, this->m_pixelShader, this->m_graphicsEngine.getD3DDevice());
@@ -94,7 +94,7 @@ bool SceneEditor::init()
 	planeComponent->init(this->m_physicsEngine.getPhysicsCommon(), this->m_physicsEngine.getPhysicsWorld(), m_plane);
 	planeComponent->setBodyType(reactphysics3d::BodyType::KINEMATIC);
 	this->m_plane->addComponent(planeComponent);
-	this->m_gameObjectManager.addGameObject(this->m_plane);
+	this->m_gameObjectManager.addGameObject(this->m_plane);*/
 
 	/*
 	this->m_sphere = new OBJModel();
@@ -117,12 +117,18 @@ bool SceneEditor::init()
 	inspector->setSceneOutlineScreen(sceneOutline);
 	inspector->setEditorCommandHistory(&(this->m_commandHistory));
 	inspector->setGameObjectManager(&(this->m_gameObjectManager));
+	inspector->setPhysicsEngine(&(this->m_physicsEngine));
+	inspector->setDevice(this->m_graphicsEngine.getD3DDevice());
 	this->m_uiEngine.addUIScreen(inspector);
 
 	MainMenuBar* mainMenu = new MainMenuBar();
 	CreditsScreen* creditsScreen = new CreditsScreen();
 	creditsScreen->init(this->m_graphicsEngine.getD3DDevice());
 	mainMenu->setCreditsScreen(creditsScreen);
+	mainMenu->setVertexShader(this->m_vertexShader);
+	mainMenu->setPixelShader(this->m_pixelShader);
+	mainMenu->setGameObjectManager(&(this->m_gameObjectManager));
+	mainMenu->setDevice(this->m_graphicsEngine.getD3DDevice());
 
 	ModeScreen* modeScreen = new ModeScreen();
 	modeScreen->setEditorStateManager(&(this->m_stateManager));

@@ -87,6 +87,89 @@ void InspectorScreen::drawUI(ViewportParams viewportParams)
 				this->m_commandHistory->recordExecutedCommand(command);
 			}
 
+			TextureComponent* textureComponent = selectedGameObject->findComponent<TextureComponent>(ComponentType::TEXTURE);
+			if (textureComponent == NULL) {
+				if (ImGui::Button("Add Texture Component")) {
+					ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".png,.jpg,.jpeg,.bmp", ".");
+				}
+				// display
+				if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
+				{
+					// action if OK
+					if (ImGuiFileDialog::Instance()->IsOk())
+					{
+						std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+						std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+						// action
+						Texture* texture = new Texture();
+						//std::cout << "File Path: " + filePath;
+						//std::cout << "File Path Name: " + filePathName;
+						texture->init(filePathName, m_device);
+						textureComponent = new TextureComponent();
+						textureComponent->setTexture(texture);
+						selectedGameObject->addComponent(textureComponent);
+					}
+
+					// close
+					ImGuiFileDialog::Instance()->Close();
+				}
+			}
+			else {
+				float color[4];
+				Vec4 colorComponent = textureComponent->getColor();
+
+				color[0] = colorComponent.m_x;
+				color[1] = colorComponent.m_y;
+				color[2] = colorComponent.m_z;
+				color[3] = colorComponent.m_w;
+
+				if (ImGui::ColorPicker4("Color Picker", color)) {
+					colorComponent.m_x = color[0];
+					colorComponent.m_y = color[1];
+					colorComponent.m_z = color[2];
+					colorComponent.m_w = color[3];
+
+					textureComponent->setColor(colorComponent);
+				}
+			}
+
+			PhysicsComponent* physicsComponent = selectedGameObject->findComponent<PhysicsComponent>(ComponentType::PHYSICS);
+			if (physicsComponent == NULL) {
+				if (ImGui::Button("Add Physics Component")) {
+					physicsComponent = new PhysicsComponent();
+					physicsComponent->init(m_physicsEngine->getPhysicsCommon(), m_physicsEngine->getPhysicsWorld(), selectedGameObject);
+					selectedGameObject->addComponent(physicsComponent);
+				}
+			}
+			else {
+				int bodyType;
+				const char* typeNames[] = { "DYNAMIC", "STATIC", "KINEMATIC" };
+				reactphysics3d::BodyType component;
+				component = physicsComponent->getBodyType();
+				if (component == reactphysics3d::BodyType::DYNAMIC) {
+					bodyType = 0;
+				}
+				else if (component == reactphysics3d::BodyType::STATIC) {
+					bodyType = 1;
+				}
+				else if (component == reactphysics3d::BodyType::KINEMATIC) {
+					bodyType = 2;
+				}
+
+				if (ImGui::Combo("Body Type", &bodyType, typeNames, IM_ARRAYSIZE(typeNames))) {
+					if (bodyType == 0) {
+						physicsComponent->setBodyType(reactphysics3d::BodyType::DYNAMIC);
+					}
+					else if (bodyType == 1) {
+						physicsComponent->setBodyType(reactphysics3d::BodyType::STATIC);
+					}
+					else if (bodyType == 2) {
+						physicsComponent->setBodyType(reactphysics3d::BodyType::KINEMATIC);
+					}
+				}
+			}
+
+			
 		}
 
 		ImGui::End();
@@ -103,4 +186,14 @@ void InspectorScreen::stateUpdated(EditorState oldState, EditorState newState)
 	{
 		this->m_textFlags = ImGuiInputTextFlags_ReadOnly;
 	}
+}
+
+void InspectorScreen::setPhysicsEngine(PhysicsEngine* physicsEngine)
+{
+	this->m_physicsEngine = physicsEngine;
+}
+
+void InspectorScreen::setDevice(ID3D11Device* device)
+{
+	this->m_device = device;
 }

@@ -1,4 +1,10 @@
 #include "ui/MainMenuBar.h"
+#include "game/Cube.h"
+#include "game/Sphere.h"
+#include "game/Cylinder.h"
+#include "game/Capsule.h"
+#include "game/Plane3D.h"
+#include "game/OBJModel.h"
 
 void MainMenuBar::update(float deltaTime)
 {
@@ -42,6 +48,40 @@ void MainMenuBar::drawUI(ViewportParams viewportParams)
 				ImGui::EndMenu();
 			}
 
+			if (ImGui::BeginMenu("Game Objects")) 
+			{
+				if (ImGui::MenuItem("Cube")) {
+					Cube* cube = new Cube();
+					cube->init(m_vertexShader, m_pixelShader, m_device);
+					m_gameObjectManager->addGameObject(cube);
+				}
+				if (ImGui::MenuItem("Sphere")) {
+					Sphere* sphere = new Sphere();
+					sphere->init(m_vertexShader, m_pixelShader, m_device, 36, 18, 1);
+					m_gameObjectManager->addGameObject(sphere);
+				}
+				if (ImGui::MenuItem("Capsule")) {
+					Capsule* capsule = new Capsule();
+					capsule->init(m_vertexShader, m_pixelShader, m_device, 5, 36, 1);
+					m_gameObjectManager->addGameObject(capsule);
+				}
+				if (ImGui::MenuItem("Cylinder")) {
+					Cylinder* cylinder = new Cylinder();
+					cylinder->init(m_vertexShader, m_pixelShader, m_device, 36, 3.5, 1);
+					m_gameObjectManager->addGameObject(cylinder);
+				}
+				if (ImGui::MenuItem("Plane")) {
+					Plane3D* plane = new Plane3D();
+					plane->init(m_vertexShader, m_pixelShader, m_device);
+					m_gameObjectManager->addGameObject(plane);
+				}
+				if (ImGui::MenuItem("3D Object")) {
+					ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".obj", ".");	
+				}
+
+				ImGui::EndMenu();
+			}
+
 			ImGui::EndMainMenuBar();
 		}
 
@@ -51,6 +91,23 @@ void MainMenuBar::drawUI(ViewportParams viewportParams)
 			ImGui::ColorPicker4("Color Picker", (float*)&(this->m_color));
 			ImGui::End();
 		}
+
+		if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
+		{
+			// action if OK
+			if (ImGuiFileDialog::Instance()->IsOk())
+			{
+				std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+				std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
+				// action
+				OBJModel* objModel = new OBJModel();
+				objModel->init(filePathName, m_vertexShader, m_pixelShader, m_device);
+				m_gameObjectManager->addGameObject(objModel);
+			}
+
+			// close
+			ImGuiFileDialog::Instance()->Close();
+		}
 	}
 }
 
@@ -58,4 +115,24 @@ void MainMenuBar::setCreditsScreen(UIScreen * creditsScreen)
 {
 	this->m_creditsScreen = creditsScreen;
 	this->m_creditsScreen->setActive(false);
+}
+
+void MainMenuBar::setVertexShader(VertexShader* vertexShader)
+{
+	this->m_vertexShader = vertexShader;
+}
+
+void MainMenuBar::setPixelShader(PixelShader* pixelShader)
+{
+	this->m_pixelShader = pixelShader;
+}
+
+void MainMenuBar::setGameObjectManager(GameObjectManager* gameObjectManager)
+{
+	this->m_gameObjectManager = gameObjectManager;
+}
+
+void MainMenuBar::setDevice(ID3D11Device* device)
+{
+	this->m_device = device;
 }

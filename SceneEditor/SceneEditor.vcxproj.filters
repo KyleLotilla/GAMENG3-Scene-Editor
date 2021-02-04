@@ -189,6 +189,9 @@
     <ClCompile Include="src\game\Plane3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="libs\ImGuiFileDialog-Lib_Only\ImGuiFileDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\engine\GameEngine.h">
@@ -387,6 +390,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\game\Plane3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGuiFileDialog-Lib_Only\ImGuiFileDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGuiFileDialog-Lib_Only\ImGuiFileDialogConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ImGuiFileDialog-Lib_Only\dirent\dirent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "editor/EditorStateListener.h"
 #include <vector>
+#include "Cube.h"
 
 class GameObjectManager : public EditorStateListener
 {
@@ -20,6 +21,7 @@ public:
 	void saveObjectState();
 	void restoreObjectState();
 	void stateUpdated(EditorState oldState, EditorState newState);
+	void createCube();
 
 private:
 	std::unordered_map<int, int> m_idIndexMapping;

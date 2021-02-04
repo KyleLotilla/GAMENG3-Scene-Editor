@@ -108,7 +108,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)libs\imgui;$(ProjectDir)include;$(ProjectDir)libs\DirectXTex\include;$(ProjectDir)libs\tinyobjloader\include;$(ProjectDir)libs\ReactPhysics3D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)libs\ImGuiFileDialog-Lib_Only;$(ProjectDir)libs\imgui;$(ProjectDir)include;$(ProjectDir)libs\DirectXTex\include;$(ProjectDir)libs\tinyobjloader\include;$(ProjectDir)libs\ReactPhysics3D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\ImGuiFileDialog-Lib_Only\ImGuiFileDialog.cpp" />
     <ClCompile Include="libs\imgui\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="libs\imgui\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="libs\imgui\imgui.cpp" />
@@ -277,6 +278,9 @@
     <ClInclude Include="include\ui\SceneOutlineScreen.h" />
     <ClInclude Include="include\ui\UIEngine.h" />
     <ClInclude Include="include\ui\UIScreen.h" />
+    <ClInclude Include="libs\ImGuiFileDialog-Lib_Only\dirent\dirent.h" />
+    <ClInclude Include="libs\ImGuiFileDialog-Lib_Only\ImGuiFileDialog.h" />
+    <ClInclude Include="libs\ImGuiFileDialog-Lib_Only\ImGuiFileDialogConfig.h" />
     <ClInclude Include="libs\imgui\backends\imgui_impl_dx11.h" />
     <ClInclude Include="libs\imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="libs\imgui\imconfig.h" />

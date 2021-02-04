@@ -120,3 +120,11 @@ void GameObjectManager::stateUpdated(EditorState oldState, EditorState newState)
 	}
 }
 
+void GameObjectManager::createCube()
+{
+	Cube* cube = new Cube();
+	cube->setPosition(Vec3(0.0f, 0.0f, 0.0f));
+	cube->setScale(Vec3(1.0f, 1.0f, 1.0f));
+	this->addGameObject(cube);
+}
+
