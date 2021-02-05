@@ -30,27 +30,25 @@ void SceneOutlineScreen::drawUI(ViewportParams viewportParams)
 		float windowHeight = viewportParams.m_bottom - viewportParams.m_top;
 		ImGui::Begin("Scene Outline", &(this->m_active), ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
 		ImGui::SetWindowPos(ImVec2(windowWidth - 505.0f, 20.0f));
-		ImGui::SetWindowSize(ImVec2(250.0f, windowHeight));
-		int i = 0;
+		ImGui::SetWindowSize(ImVec2(250.0f, windowHeight - 20.0f));
 
 		for (GameObject* gameObject : *(this->m_gameObjectManager))
 		{
 			bool selectedFlag = false;
 
-			if (this->m_selectedIndex == i)
+			if (this->m_selectedID == gameObject->getID())
 			{
 				selectedFlag = true;
 			}
 
-			std::string indexString = std::to_string(i);
+			std::string indexString = std::to_string(gameObject->getID());
 
 			if (ImGui::Selectable(indexString.c_str(), selectedFlag))
 			{
-				this->m_selectedIndex = i;
-				this->m_selected = this->m_gameObjectManager->getGameObject(i);
+				this->m_selectedID = gameObject->getID();
+				this->m_selected = gameObject;
 			}
 
-			i++;
 		}
 
 		ImGui::End();

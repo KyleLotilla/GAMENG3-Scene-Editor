@@ -19,7 +19,7 @@ void PhysicsEngine::update(float delta_time)
 {
 	if (delta_time > 0.0f)
 	{
-		
+		/*
 		for (GameObject* gameObject : *(this->m_gameObjectManager))
 		{
 			PhysicsComponent* component = nullptr;
@@ -28,8 +28,16 @@ void PhysicsEngine::update(float delta_time)
 				component->setTransform(gameObject->getLocalPosition(), gameObject->getLocalRotationQuaternion(), gameObject->getLocalScale());
 			}
 		}
+		*/
 
-		this->m_physicsWorld->update(delta_time * 0.5);
+		if (delta_time > this->MAX_TIMESTEP)
+		{
+			this->m_physicsWorld->update(this->MAX_TIMESTEP);
+		}
+		else
+		{
+			this->m_physicsWorld->update(delta_time);
+		}
 
 		for (GameObject* gameObject : *(this->m_gameObjectManager))
 		{
@@ -60,7 +68,7 @@ reactphysics3d::PhysicsWorld* PhysicsEngine::getPhysicsWorld()
 
 void PhysicsEngine::stateUpdated(EditorState oldState, EditorState newState)
 {
-	if (newState == EditorState::EDIT_MODE)
+	if (oldState == EditorState::PLAY_MODE && newState == EditorState::EDIT_MODE)
 	{
 		for (GameObject* gameObject : *(this->m_gameObjectManager))
 		{
@@ -71,7 +79,7 @@ void PhysicsEngine::stateUpdated(EditorState oldState, EditorState newState)
 			}
 		}
 	}
-	else if (newState == EditorState::PLAY_MODE)
+	else if (oldState == EditorState::EDIT_MODE && newState == EditorState::PLAY_MODE)
 	{
 		for (GameObject* gameObject : *(this->m_gameObjectManager))
 		{
@@ -79,6 +87,7 @@ void PhysicsEngine::stateUpdated(EditorState oldState, EditorState newState)
 			if (component = gameObject->findComponent<PhysicsComponent>(ComponentType::PHYSICS))
 			{
 				component->setIsActive(true);
+				component->setTransform(gameObject->getLocalPosition(), gameObject->getLocalRotationQuaternion(), gameObject->getLocalScale());
 			}
 		}
 	}

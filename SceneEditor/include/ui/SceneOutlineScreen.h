@@ -19,6 +19,6 @@ public:
 private:
 	GameObjectManager* m_gameObjectManager;
 	GameObject* m_selected;
-	int m_selectedIndex = -1;
+	int m_selectedID = -1;
 
 };

@@ -18,4 +18,5 @@ private:
 	reactphysics3d::PhysicsCommon* m_physicsCommon;
 	reactphysics3d::PhysicsWorld* m_physicsWorld;
 	GameObjectManager* m_gameObjectManager;
+	const float MAX_TIMESTEP = 1.0f / 60.0f;
 };
