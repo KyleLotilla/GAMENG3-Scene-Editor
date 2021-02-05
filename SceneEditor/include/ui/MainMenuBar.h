@@ -5,6 +5,7 @@
 #include "backends/imgui_impl_win32.h"
 #include "game/GameObjectManager.h"
 #include "ImGuiFileDialog.h"
+#include <physics/PhysicsEngine.h>
 
 class MainMenuBar : public UIScreen
 {
@@ -16,6 +17,7 @@ public:
 	void setPixelShader(PixelShader* pixelShader);
 	void setGameObjectManager(GameObjectManager* gameObjectManager);
 	void setDevice(ID3D11Device* device);
+	void setPhysicsEngine(PhysicsEngine* physicsEngine);
 
 private:
 	UIScreen* m_creditsScreen;
@@ -26,4 +28,5 @@ private:
 	GameObjectManager* m_gameObjectManager;
 	ID3D11Device* m_device;
 	ImGuiFileDialog m_fileDialog;
+	PhysicsEngine* m_physicsEngine;
 };

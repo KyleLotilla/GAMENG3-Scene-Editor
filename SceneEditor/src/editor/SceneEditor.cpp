@@ -129,6 +129,7 @@ bool SceneEditor::init()
 	mainMenu->setPixelShader(this->m_pixelShader);
 	mainMenu->setGameObjectManager(&(this->m_gameObjectManager));
 	mainMenu->setDevice(this->m_graphicsEngine.getD3DDevice());
+	mainMenu->setPhysicsEngine(&(this->m_physicsEngine));
 
 	ModeScreen* modeScreen = new ModeScreen();
 	modeScreen->setEditorStateManager(&(this->m_stateManager));

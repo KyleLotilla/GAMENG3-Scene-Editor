@@ -53,7 +53,7 @@ void MainMenuBar::drawUI(ViewportParams viewportParams)
 				if (ImGui::MenuItem("Cube")) {
 					Cube* cube = new Cube();
 					cube->init(m_vertexShader, m_pixelShader, m_device);
-					m_gameObjectManager->addGameObject(cube);
+					m_gameObjectManager->addGameObject(cube);		
 				}
 				if (ImGui::MenuItem("Sphere")) {
 					Sphere* sphere = new Sphere();
@@ -77,6 +77,20 @@ void MainMenuBar::drawUI(ViewportParams viewportParams)
 				}
 				if (ImGui::MenuItem("3D Object")) {
 					m_fileDialog.OpenDialog("ChooseFileDlgKey", "Choose File", ".obj", ".");	
+				}
+				if (ImGui::MenuItem("Spawn 100 Physics Cubes")) {
+					Cube* cubes[100];
+
+					for (int i = 0; i < 100; i++)
+					{
+						cubes[i] = new Cube();
+						cubes[i]->init(m_vertexShader, m_pixelShader, m_device);
+						cubes[i]->setPosition(Vec3(0.0f, 5.0f, 0.0f));
+						PhysicsComponent* cubeComponent = new PhysicsComponent();
+						cubeComponent->init(m_physicsEngine->getPhysicsCommon(), m_physicsEngine->getPhysicsWorld(), cubes[i]);
+						cubes[i]->addComponent(cubeComponent);
+						m_gameObjectManager->addGameObject(cubes[i]);
+					}
 				}
 
 				ImGui::EndMenu();
@@ -131,4 +145,9 @@ void MainMenuBar::setGameObjectManager(GameObjectManager* gameObjectManager)
 void MainMenuBar::setDevice(ID3D11Device* device)
 {
 	this->m_device = device;
+}
+
+void MainMenuBar::setPhysicsEngine(PhysicsEngine* physicsEngine)
+{
+	this->m_physicsEngine = physicsEngine;
 }
