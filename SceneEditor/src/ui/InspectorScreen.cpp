@@ -109,6 +109,27 @@ void InspectorScreen::drawUI(ViewportParams viewportParams)
 				}
 			}
 			else {
+				ImGui::Text("Texture Component");
+
+				ImGui::Image((void*)(textureComponent->getTexture()->getShaderResourceView()), ImVec2(100.0f, 100.0f));
+
+				if (ImGui::Button("Change Texture")) {
+					m_fileDialog.OpenDialog("ChooseFileDlgKey", "Choose File", ".png,.jpg,.jpeg,.bmp", ".");
+				}
+				if (m_fileDialog.Display("ChooseFileDlgKey"))
+				{
+					if (m_fileDialog.IsOk())
+					{
+						std::string filePathName = m_fileDialog.GetFilePathName();
+						Texture* texture = new Texture();
+						texture->init(filePathName, m_device);
+						textureComponent->setTexture(texture);
+						selectedGameObject->addComponent(textureComponent);
+					}
+
+					m_fileDialog.Close();
+				}
+
 				float color[4];
 				Vec4 colorComponent = textureComponent->getColor();
 
@@ -136,6 +157,7 @@ void InspectorScreen::drawUI(ViewportParams viewportParams)
 				}
 			}
 			else {
+				ImGui::Text("Physics Component");
 				int bodyType;
 				const char* typeNames[] = { "DYNAMIC", "STATIC", "KINEMATIC" };
 				reactphysics3d::BodyType component;
