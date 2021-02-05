@@ -13,6 +13,7 @@
 #include "physics/PhysicsEngine.h"
 #include "graphics/TextureComponent.h"
 #include "ImGuiFileDialog.h"
+#include <sstream>
 
 class InspectorScreen : public UIScreen, public EditorStateListener
 {

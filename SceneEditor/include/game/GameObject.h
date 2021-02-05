@@ -5,6 +5,7 @@
 #include "Component.h"
 #include "math/Vec3.h"
 #include "reactphysics3d/reactphysics3d.h"
+#include "math/Mat4.h"
 
 class GameObject
 {
@@ -28,6 +29,9 @@ public:
 	void removeComponent(Component* component);
 	template <typename Component_t>  Component_t* findComponent(ComponentType type);
 	template <typename Component_t> std::vector<Component_t> findComponents(ComponentType type);
+	Mat4 getModelMatrix();
+	void setParent(GameObject* parent);
+	GameObject* getParent();
 
 protected:
 	int m_id = -1;
@@ -35,6 +39,7 @@ protected:
 	Vec3 m_localScale;
 	reactphysics3d::Quaternion m_localRotation;
 	std::vector<Component*> m_components;
+	GameObject* m_parent = nullptr;
 };
 
 template<typename Component_t>

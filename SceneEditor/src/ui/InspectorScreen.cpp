@@ -43,6 +43,60 @@ void InspectorScreen::drawUI(ViewportParams viewportParams)
 
 		if (selectedGameObject != nullptr)
 		{
+			std::vector<std::string> ids;
+			ids.push_back("None");
+			int parentID = -1;
+			int parentIndex = 0;
+			GameObject* parent = selectedGameObject->getParent();
+			if (parent != nullptr)
+			{
+				parentID = parent->getID();
+			}
+
+			for (GameObject* gameObject : *(this->m_gameObjectManager))
+			{
+				if (gameObject->getID() != selectedGameObject->getID())
+				{
+					std::string idString = std::to_string(gameObject->getID());
+					ids.push_back(idString);
+					if (gameObject->getID() == parentID)
+					{
+						parentIndex = ids.size() - 1;
+					}
+				}
+			}
+
+			if (ImGui::BeginCombo("Parent", ids[parentIndex].c_str()))
+			{
+				for (int i = 0; i < ids.size(); i++)
+				{
+					bool selectedFlag = false;
+					if (i == parentIndex)
+					{
+						selectedFlag = true;
+					}
+
+					if (ImGui::Selectable(ids[i].c_str(), selectedFlag))
+					{
+						parentIndex = i;
+						if (parentIndex == 0)
+						{
+							selectedGameObject->setParent(nullptr);
+						}
+						else
+						{
+							std::stringstream stream;
+							stream << ids[parentIndex];
+							stream >> parentID;
+							parent = this->m_gameObjectManager->getGameObject(parentID);
+							selectedGameObject->setParent(parent);
+						}
+					}
+					
+				}
+				ImGui::EndCombo();
+			}
+
 			Vec3 position = selectedGameObject->getLocalPosition();
 			Vec3 rotation = selectedGameObject->getLocalRotationVector();
 			Vec3 scale = selectedGameObject->getLocalScale();

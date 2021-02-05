@@ -115,3 +115,52 @@ void GameObject::removeComponent(Component* component)
 		}
 	}
 }
+
+Mat4 GameObject::getModelMatrix()
+{
+	Mat4 modelMatrix;
+	Mat4 translateMatrix;
+	Mat4 scaleMatrix;
+	Mat4 rotationMatrix;
+	reactphysics3d::Matrix3x3 quaternionMatrix = this->m_localRotation.getMatrix();
+	rotationMatrix.m_mat[0][0] = quaternionMatrix[0][0];
+	rotationMatrix.m_mat[0][1] = quaternionMatrix[1][0];
+	rotationMatrix.m_mat[0][2] = quaternionMatrix[2][0];
+	rotationMatrix.m_mat[0][3] = 0.0f;
+
+	rotationMatrix.m_mat[1][0] = quaternionMatrix[0][1];
+	rotationMatrix.m_mat[1][1] = quaternionMatrix[1][1];
+	rotationMatrix.m_mat[1][2] = quaternionMatrix[2][1];
+	rotationMatrix.m_mat[1][3] = 0.0f;
+
+	rotationMatrix.m_mat[2][0] = quaternionMatrix[0][2];
+	rotationMatrix.m_mat[2][1] = quaternionMatrix[1][2];
+	rotationMatrix.m_mat[2][2] = quaternionMatrix[2][2];
+	rotationMatrix.m_mat[2][3] = 0.0f;
+
+	rotationMatrix.m_mat[3][0] = 0.0f;
+	rotationMatrix.m_mat[3][1] = 0.0f;
+	rotationMatrix.m_mat[3][2] = 0.0f;
+	rotationMatrix.m_mat[3][3] = 1.0f;
+
+	scaleMatrix.setScale(this->m_localScale);
+	translateMatrix.setTranslation(this->m_localPosition);
+	modelMatrix = rotationMatrix * scaleMatrix * translateMatrix;
+
+	if (this->m_parent != nullptr)
+	{
+		modelMatrix = modelMatrix * this->m_parent->getModelMatrix();
+	}
+
+	return modelMatrix;
+}
+
+void GameObject::setParent(GameObject* parent)
+{
+	this->m_parent = parent;
+}
+
+GameObject* GameObject::getParent()
+{
+	return this->m_parent;
+}
