@@ -25,5 +25,5 @@ private:
 	VertexShader* m_vertexShader;
 	GameObjectManager* m_gameObjectManager;
 	ID3D11Device* m_device;
-
+	ImGuiFileDialog m_fileDialog;
 };

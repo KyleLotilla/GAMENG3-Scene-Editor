@@ -76,7 +76,7 @@ void MainMenuBar::drawUI(ViewportParams viewportParams)
 					m_gameObjectManager->addGameObject(plane);
 				}
 				if (ImGui::MenuItem("3D Object")) {
-					ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".obj", ".");	
+					m_fileDialog.OpenDialog("ChooseFileDlgKey", "Choose File", ".obj", ".");	
 				}
 
 				ImGui::EndMenu();
@@ -92,21 +92,17 @@ void MainMenuBar::drawUI(ViewportParams viewportParams)
 			ImGui::End();
 		}
 
-		if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
+		if (m_fileDialog.Display("ChooseFileDlgKey"))
 		{
-			// action if OK
-			if (ImGuiFileDialog::Instance()->IsOk())
+			if (m_fileDialog.IsOk())
 			{
-				std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-				std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-				// action
+				std::string filePathName = m_fileDialog.GetFilePathName();
 				OBJModel* objModel = new OBJModel();
 				objModel->init(filePathName, m_vertexShader, m_pixelShader, m_device);
 				m_gameObjectManager->addGameObject(objModel);
 			}
 
-			// close
-			ImGuiFileDialog::Instance()->Close();
+			m_fileDialog.Close();
 		}
 	}
 }

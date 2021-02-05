@@ -90,28 +90,22 @@ void InspectorScreen::drawUI(ViewportParams viewportParams)
 			TextureComponent* textureComponent = selectedGameObject->findComponent<TextureComponent>(ComponentType::TEXTURE);
 			if (textureComponent == NULL) {
 				if (ImGui::Button("Add Texture Component")) {
-					ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".png,.jpg,.jpeg,.bmp", ".");
+					m_fileDialog.OpenDialog("ChooseFileDlgKey", "Choose File", ".png,.jpg,.jpeg,.bmp", ".");
 				}
 				// display
-				if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
+				if (m_fileDialog.Display("ChooseFileDlgKey"))
 				{
-					// action if OK
-					if (ImGuiFileDialog::Instance()->IsOk())
+					if (m_fileDialog.IsOk())
 					{
-						std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
-						std::string filePath = ImGuiFileDialog::Instance()->GetCurrentPath();
-						// action
+						std::string filePathName = m_fileDialog.GetFilePathName();
 						Texture* texture = new Texture();
-						//std::cout << "File Path: " + filePath;
-						//std::cout << "File Path Name: " + filePathName;
 						texture->init(filePathName, m_device);
 						textureComponent = new TextureComponent();
 						textureComponent->setTexture(texture);
 						selectedGameObject->addComponent(textureComponent);
 					}
 
-					// close
-					ImGuiFileDialog::Instance()->Close();
+					m_fileDialog.Close();
 				}
 			}
 			else {

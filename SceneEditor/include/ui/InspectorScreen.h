@@ -38,4 +38,5 @@ private:
 	ImGuiInputTextFlags m_textFlags = ImGuiInputTextFlags_EnterReturnsTrue;
 	PhysicsEngine* m_physicsEngine;
 	ID3D11Device* m_device;
+	ImGuiFileDialog m_fileDialog;
 };
